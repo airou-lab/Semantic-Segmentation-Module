@@ -157,7 +157,6 @@ class SegformerFinetuner(pl.LightningModule):
         self.test_mean_iou = load_metric("mean_iou")
         self.validation_step_outputs = []
         
-        # ... rest of your initialization code ...
 
 
     def forward(self, images, masks):
