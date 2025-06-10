@@ -1,6 +1,6 @@
 # Semantic Segmentation in Aviary with SegFormer
 
-This project implements semantic segmentation for bird camera trap images using SegFormer, identifying 8 classes: Background, Branch, Camera, Fence, Ground, Nest, Tree, and Water.
+This project implements semantic segmentation for an aviary using SegFormer, identifying 8 classes: Background, Branch, Camera, Fence, Ground, Nest, Tree, and Water.
 
 ## Table of Contents
 - [Installation](#installation)
