@@ -242,7 +242,7 @@ For advanced users, modify `model.py`:
 
 ## Citation
 
-If you use this code, please cite:
+This is an implementation of Segformer. The original code can be found at:
 ```bibtex
 @article{xie2021segformer,
   title={SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers},
