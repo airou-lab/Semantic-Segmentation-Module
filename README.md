@@ -2,6 +2,24 @@
 
 This project implements semantic segmentation for an aviary using SegFormer, identifying 8 classes: Background, Branch, Camera, Fence, Ground, Nest, Tree, and Water.
 
+
+## UPDATE: inference & JSON
+
+inference: 
+
+python scripts/inference.py \
+--checkpoint checkpoints/bird_project_combined_v5.ckpt \
+--input_dir /path/to/images \
+--output_dir /path/to/output
+
+export_results:
+
+python scripts/export_results.py \
+--checkpoint checkpoints/bird_project_combined_v5.ckpt \
+--input_dir /path/to/images \
+--output_dir /path/to/outputs
+
+
 ## Table of Contents
 - [Installation](#installation)
 - [Project Structure](#project-structure)
@@ -47,7 +65,7 @@ bird-segmentation/
 ├── utils.py                     # Utility functions
 │
 ├── checkpoints/                 # Saved model checkpoints
-│   └── bird_project_combined_v3.ckpt
+│   └── bird_project_combined_v5.ckpt
 │
 └── lightning_logs/              # Training logs
 ```
