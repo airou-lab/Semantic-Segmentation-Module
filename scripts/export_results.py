@@ -2,8 +2,13 @@
 Export segmentation results to various formats
 """
 
-import argparse
+### fixing model import issue
+import sys
 import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '../src'))
+### end of fixing model import issue 
+
+import argparse
 import json
 import cv2
 import numpy as np
@@ -124,6 +129,10 @@ def process_image(model, feature_extractor, image_path, interpolate=False):
     # Prepare image
     inputs = feature_extractor(images=input_image, return_tensors="pt")
     
+    # Move inputs to same device as model
+    device = next(model.model.parameters()).device
+    inputs = {k: v.to(device) for k, v in inputs.items()}
+
     # Run inference
     with torch.no_grad():
         outputs = model.model(**inputs)
