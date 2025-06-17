@@ -4,7 +4,8 @@ SegFormer model wrapper with PyTorch Lightning
 
 import pytorch_lightning as pl
 from transformers import SegformerForSemanticSegmentation
-from datasets import load_metric
+# from datasets import load_metric // old evaluate has been deprecated
+from evaluate import load as load_metric
 import torch
 from torch import nn
 import numpy as np

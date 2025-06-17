@@ -2,6 +2,12 @@
 Inference script for SegFormer model
 """
 
+### fixing model import issue
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '../src'))
+### end of fixing model import issue 
+
 import argparse
 import os
 from PIL import Image
@@ -27,6 +33,11 @@ def run_inference_single(model, feature_extractor, image_path, interpolate=False
     # Prepare image for model
     inputs = feature_extractor(images=input_image, return_tensors="pt")
     
+    # Move model and inputs to GPU if available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.model.to(device)
+    inputs = {k: v.to(device) for k, v in inputs.items()}
+
     # Run inference
     with torch.no_grad():
         outputs = model.model(**inputs)
@@ -82,6 +93,10 @@ def run_inference_batch(model, feature_extractor, input_dir, output_dir,
                    if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
     
     print(f"Processing {len(image_files)} images...")
+
+    # Choose device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.model.to(device)
     
     for image_file in tqdm(image_files, desc="Running inference"):
         image_path = os.path.join(input_dir, image_file)
@@ -90,6 +105,9 @@ def run_inference_batch(model, feature_extractor, input_dir, output_dir,
         
         # Prepare image
         inputs = feature_extractor(images=input_image, return_tensors="pt")
+
+        # Move input to GPU/CPU
+        inputs = {k: v.to(device) for k, v in inputs.items()}
         
         # Run inference
         with torch.no_grad():
